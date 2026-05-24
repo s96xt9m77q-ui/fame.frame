@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maison Noir Paris — Harsh Patel Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="behance.css" />
+  <style>
+    /* Premium Case Study Visual System overrides for Maison Noir */
+    body.project-page {
+      background: #060606;
+      color: #f4f0eb;
+    }
+    .project-hero {
+      position: relative;
+      height: 75vh;
+      overflow: hidden;
+    }
+    .project-hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.75);
+    }
+    .project-info-section {
+      background: #0a0a0a;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .project-h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 900;
+      color: #f4f0eb;
+    }
+    .project-h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #c9a96e; /* Warm matte gold color */
+      margin-top: 0.5rem;
+    }
+    .meta-label {
+      color: rgba(244, 240, 235, 0.4);
+    }
+    .meta-value {
+      color: #c9a96e;
+      font-weight: 500;
+    }
+    .project-description p {
+      color: rgba(244, 240, 235, 0.65);
+      line-height: 1.85;
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+    }
+    .presentation-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+    }
+    .presentation-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .presentation-row {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+    .presentation-card {
+      background: #0d0d0d;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      padding: 1.5rem;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s;
+    }
+    .presentation-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(201, 169, 110, 0.25);
+    }
+    .presentation-img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 2px;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+    }
+    .presentation-desc {
+      margin-top: 1.5rem;
+      font-family: 'Space Grotesk', sans-serif;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: #c9a96e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .presentation-desc span {
+      color: rgba(244, 240, 235, 0.3);
+      font-family: 'Inter', sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 0.85rem;
+    }
+    .full-width-showcase {
+      width: 100%;
+      background: #0d0d0d;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .full-width-showcase img {
+      width: 100%;
+      max-height: 70vh;
+      object-fit: cover;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body class="project-page">
+
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- ── NAV ── -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="behance.html" class="nav-logo">HP</a>
+      <ul class="nav-links">
+        <li><a href="behance.html#work" class="nav-link">Work</a></li>
+        <li><a href="behance.html#about" class="nav-link">About</a></li>
+      </ul>
+      <a href="mailto:Patelharsh00745@gmail.com" class="nav-cta">Hire Me</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="project-hero">
+    <img src="maison_noir_interior.jpg" alt="Maison Noir Roastery Interior" class="project-hero-img" />
+  </section>
+
+  <!-- ── PROJECT INFO ── -->
+  <section class="project-info-section">
+    <div class="project-info-inner reveal">
+      <div class="project-title-area">
+        <h1 class="project-h1">Maison Noir</h1>
+        <p class="project-h2">Artisanal Café &amp; Coffee Roastery Identity</p>
+      </div>
+
+      <div class="project-meta-grid">
+        <div class="meta-item">
+          <span class="meta-label">Client</span>
+          <span class="meta-value">Maison Noir Paris</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Role</span>
+          <span class="meta-value">Lead Brand Identity Designer</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Discipline</span>
+          <span class="meta-value">Packaging, Collateral, Environmental Design</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Year</span>
+          <span class="meta-value">2026</span>
+        </div>
+      </div>
+
+      <div class="project-description">
+        <p>Maison Noir is a premium micro-roastery and artisanal coffee house located in the heart of Paris, France. The objective was to create a bold, high-contrast visual identity that respects traditional French bistro design while introducing a sharp, modern minimalist system suited for design-conscious consumers.</p>
+        <p>The visual system features a luxurious matte-black foundation contrasted by fine, warm-gold typography, monograms, and crest logos. The collateral rollout spans customized single-origin coffee packaging labels, gold-embossed takeaway cups, physical printed menu sheets, and spatial environmental branding for the micro-roastery shop.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRESENTATION ── -->
+  <section class="project-presentation">
+    <div class="presentation-container reveal">
+
+      <!-- ROW 1: Gold-Embossed Takeaway Cup & Packaging -->
+      <div class="presentation-row">
+        <div class="presentation-card">
+          <img src="maison_noir_cup.jpg" alt="Maison Noir Gold-Embossed Cup" class="presentation-img" />
+          <div class="presentation-desc">
+            Takeaway Packaging
+            <span>01 — Gold-Embossed Paper Cup</span>
+          </div>
+        </div>
+        <div class="presentation-card">
+          <img src="maison_noir_bag.jpg" alt="Maison Noir Single-Origin Coffee Package" class="presentation-img" />
+          <div class="presentation-desc">
+            Coffee Roast Packaging
+            <span>02 — Single-Origin Roast Bag</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROW 2: Full Width Menu Layout -->
+      <div class="full-width-showcase">
+        <img src="maison_noir_menu.jpg" alt="Maison Noir Editorial Store Menu" />
+        <div class="presentation-desc" style="margin-top: 2rem;">
+          Editorial Print
+          <span>03 — Curated Store Menu &amp; Lumiere Magazine Layout</span>
+        </div>
+      </div>
+
+      <!-- ROW 3: Full Width Interior Environmental Brand -->
+      <div class="full-width-showcase">
+        <img src="maison_noir_interior.jpg" alt="Maison Noir Roastery Counter Design" />
+        <div class="presentation-desc" style="margin-top: 2rem;">
+          Environmental Branding
+          <span>04 — Micro-Roastery Retail Shop Counters &amp; Signage</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── NEXT PROJECT ── -->
+  <section class="next-project-section">
+    <a href="melrose-nolan.html" class="next-project-link">
+      <span class="next-label">Next Project</span>
+      <h2 class="next-title">Melrose &amp; Nolan Cafe ↗</h2>
+    </a>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-name">Harsh Patel</span>
+      <span class="footer-copy">© 2026 · All rights reserved</span>
+    </div>
+  </footer>
+
+  <script src="behance.js"></script>
+</body>
+</html>

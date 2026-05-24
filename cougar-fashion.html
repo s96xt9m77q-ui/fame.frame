@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cougar Fashion — Case Study | Harsh Patel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060606; --fg: #f4f0eb; --accent: #3EFFA0;
+    --brand-silver: #c8c4be; --brand-white: #f4f0eb; --brand-char: #1c1c1c;
+    --brand-elec: #d4ff00; --brand-mid: #7a7a7a;
+    --muted: #555; --border: rgba(255,255,255,0.08);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--fg); font-family:'Jost',sans-serif; font-weight:300; overflow-x:hidden; }
+
+  nav { position:fixed; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between; padding:1.2rem 3rem; background:rgba(6,6,6,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); z-index:100; }
+  nav .logo { font-family:'Playfair Display',serif; font-size:1.05rem; letter-spacing:0.03em; color:var(--fg); text-decoration:none; }
+  nav ul { display:flex; gap:2rem; list-style:none; }
+  nav ul a { color:rgba(244,240,235,0.5); font-size:0.75rem; text-decoration:none; letter-spacing:0.12em; text-transform:uppercase; transition:color 0.2s; }
+  nav ul a:hover { color:var(--fg); }
+  nav .cv-link { background:var(--accent); color:#060606 !important; padding:0.35rem 0.9rem; border-radius:2px; font-weight:500; }
+
+  .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:8rem 3rem 5rem; position:relative; overflow:hidden; }
+  .hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 50% 60% at 85% 15%, rgba(212,255,0,0.04) 0%, transparent 50%), radial-gradient(ellipse 60% 50% at 15% 85%, rgba(200,196,190,0.04) 0%, transparent 50%), #060606; }
+  .hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size:60px 60px; }
+  .hero-label { font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--brand-mid); margin-bottom:1.5rem; position:relative; }
+  .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(4rem,10vw,8.5rem); font-weight:700; line-height:0.92; letter-spacing:-0.02em; position:relative; color:var(--fg); display: flex; align-items: center; flex-wrap: wrap; }
+  
+  /* Official Cougar Brand Logo Styles */
+  .hero-brand-logo {
+    height: clamp(55px, 8vw, 100px);
+    width: auto;
+    object-fit: contain;
+    margin-left: 1.5rem;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s;
+    vertical-align: middle;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+  }
+  .hero h1:hover .hero-brand-logo {
+    transform: scale(1.08) rotate(3deg);
+    filter: drop-shadow(0 8px 24px rgba(254, 80, 0, 0.45));
+  }
+
+  .hero h1 em { font-style:italic; font-weight:400; color:var(--brand-silver); width: 100%; }
+  .hero-sub { margin-top:2rem; max-width:520px; font-size:1rem; line-height:1.8; color:rgba(244,240,235,0.5); position:relative; }
+  .hero-tags { display:flex; gap:0.6rem; margin-top:2rem; flex-wrap:wrap; position:relative; }
+  .tag { border:1px solid var(--border); padding:0.3rem 0.9rem; border-radius:100px; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(244,240,235,0.4); }
+
+  .overview { padding:5rem 3rem; display:grid; grid-template-columns:1fr 1fr; gap:5rem; border-top:1px solid var(--border); }
+  .overview-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+  .overview-stat h3 { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:0.6rem; }
+  .overview-stat p { font-size:0.95rem; line-height:1.6; color:rgba(244,240,235,0.7); }
+
+  section { padding:5rem 3rem; border-top:1px solid var(--border); }
+  .section-label { font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--muted); margin-bottom:2.5rem; }
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3.2rem); line-height:1.1; margin-bottom:1.5rem; }
+  .section-title em { font-style:italic; color:var(--brand-silver); }
+  .section-body { font-size:0.95rem; line-height:1.85; color:rgba(244,240,235,0.6); max-width:680px; }
+
+  .palette-row { display:flex; margin:2.5rem 0; border-radius:3px; overflow:hidden; height:72px; }
+  .swatch { flex:1; position:relative; }
+  .swatch-label { position:absolute; bottom:0.5rem; left:0.6rem; font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.55); }
+  .swatch.dark .swatch-label { color:rgba(0,0,0,0.5); }
+
+  .type-row { padding:1.2rem 0; border-bottom:1px solid var(--border); display:flex; align-items:baseline; gap:2rem; }
+  .type-label { font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); min-width:110px; }
+
+  /* Editorial grid */
+  .editorial-grid { display:grid; grid-template-columns:2fr 1fr; gap:1px; margin:2.5rem 0; background:var(--border); }
+  .editorial-col { display:flex; flex-direction:column; gap:1px; }
+  .editorial-card { background:#0e0e0e; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .editorial-card.tall { aspect-ratio:3/4; }
+  .editorial-card.wide { aspect-ratio:16/7; }
+  .editorial-card.square { aspect-ratio:1; }
+  .edit-post { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.4rem; padding:1.5rem; text-align:center; }
+
+  /* lookbook strip */
+  .lookbook { display:flex; gap:1px; margin:2rem 0; background:var(--border); overflow:hidden; }
+  .look { flex:1; aspect-ratio:2/3; background:#0e0e0e; display:flex; flex-direction:column; justify-content:flex-end; padding:1rem; position:relative; overflow:hidden; }
+  .look-num { position:absolute; top:0.8rem; left:0.8rem; font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:700; color:rgba(255,255,255,0.04); line-height:1; }
+  .look-label { font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--brand-mid); }
+  .look-name { font-family:'Playfair Display',serif; font-size:0.9rem; color:var(--fg); margin-top:0.2rem; }
+
+  .results-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin:2.5rem 0; }
+  .result-item { padding:2rem; border:1px solid var(--border); }
+  .result-num { font-family:'Playfair Display',serif; font-size:3.2rem; font-weight:700; color:var(--brand-silver); line-height:1; margin-bottom:0.4rem; }
+  .result-label { font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); line-height:1.5; }
+
+  .nav-strip { padding:4rem 3rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+  .nav-strip a { color:var(--fg); text-decoration:none; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; transition:color 0.2s; }
+  .nav-strip a:hover { color:var(--accent); }
+
+  footer { padding:2rem 3rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+  footer p { font-size:0.7rem; color:var(--muted); }
+  footer a { color:var(--muted); text-decoration:none; font-size:0.7rem; }
+  footer a:hover { color:var(--accent); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);} }
+  .hero-label{animation:fadeUp 0.8s 0.1s ease both;} .hero h1{animation:fadeUp 0.9s 0.25s ease both;} .hero-sub{animation:fadeUp 0.8s 0.4s ease both;} .hero-tags{animation:fadeUp 0.8s 0.55s ease both;}
+
+  /* Campaign and Feed systems styles */
+  .social-systems-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin: 3.5rem 0;
+  }
+  .social-grid-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .social-grid-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .social-grid-card p {
+    font-size: 0.85rem;
+    color: rgba(244,240,235,0.5);
+    line-height: 1.6;
+  }
+  .social-grid-image-wrap {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    background: #000;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s;
+  }
+  .social-grid-image-wrap:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212,255,0,0.3);
+  }
+  .social-grid-image-wrap img {
+    width: 100%;
+    display: block;
+  }
+  .editorial-hero-banner {
+    margin: 2.5rem 0;
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .editorial-hero-banner:hover {
+    border-color: rgba(200,196,190,0.3);
+  }
+  .editorial-hero-banner img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  @media(max-width:768px){
+    nav{padding:1rem 1.5rem;} nav ul{display:none;}
+    .hero,section,.overview,.nav-strip,footer{padding-left:1.5rem;padding-right:1.5rem;}
+    .overview{grid-template-columns:1fr;gap:2.5rem;}
+    .results-grid{grid-template-columns:1fr 1fr;}
+    .editorial-grid{grid-template-columns:1fr;}
+    .lookbook{flex-wrap:wrap;}
+    .social-systems-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="behance.html" class="logo">Harsh Patel</a>
+  <ul>
+    <li><a href="behance.html">Home</a></li>
+    <li><a href="behance.html#about">About</a></li>
+    <li><a href="behance.html#work">Work</a></li>
+    <li><a href="behance.html#contact">Contact</a></li>
+    <li><a href="cv.html" class="cv-link">View CV</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-label">Editorial Identity &amp; Social Media — Fashion</div>
+  <h1>Cougar<img src="cougar_official_logo.png" alt="Cougar Logo" class="hero-brand-logo" /><br><em>Fashion</em></h1>
+  <p class="hero-sub">High-fashion editorial identity and social media content for an independent UK fashion label — built to compete with premium brands across Instagram and TikTok.</p>
+  <div class="hero-tags">
+    <span class="tag">Brand Identity</span>
+    <span class="tag">Editorial Design</span>
+    <span class="tag">Social Templates</span>
+    <span class="tag">Lookbook</span>
+    <span class="tag">Adobe Photoshop</span>
+    <span class="tag">Figma</span>
+  </div>
+</div>
+
+<div class="overview">
+  <div>
+    <div class="section-label">Project Overview</div>
+    <p class="section-body" style="max-width:100%;color:rgba(244,240,235,0.7)">
+      Cougar Fashion is an independent UK label with a bold aesthetic and a founder-led vision. They needed a brand design system that felt truly premium — capable of sitting alongside established fashion houses on a feed — built on a founder's budget, without sacrificing any sophistication.
+    </p>
+  </div>
+  <div class="overview-grid">
+    <div class="overview-stat"><h3>Role</h3><p>Lead Designer</p></div>
+    <div class="overview-stat"><h3>Year</h3><p>2023 – 2024</p></div>
+    <div class="overview-stat"><h3>Sector</h3><p>Fashion / Apparel</p></div>
+    <div class="overview-stat"><h3>Tools</h3><p>Photoshop, Illustrator, Figma, Canva Pro</p></div>
+  </div>
+</div>
+
+<section>
+  <div class="section-label">01 — The Challenge</div>
+  <h2 class="section-title">Boutique budget, <em>luxury presence</em></h2>
+  <p class="section-body">Independent fashion labels face an impossible tension: the expectation of premium aesthetics at a fraction of the budget of the brands they compete with for attention. The ask was to create a visual system that could hold its own against high-fashion editorial content — distinct, confident, and impossible to scroll past.</p>
+</section>
+
+<section>
+  <div class="section-label">02 — Colour System</div>
+  <h2 class="section-title">The power of <em>restraint</em></h2>
+  <p class="section-body">A high-contrast monochrome foundation — near-black, pure white, warm silver — punctuated by an electric acid yellow that creates immediate, disruptive visual impact. No gradient softness. No compromise.</p>
+  <div class="palette-row">
+    <div class="swatch" style="background:#060606"><span class="swatch-label">Noir</span></div>
+    <div class="swatch" style="background:#1c1c1c"><span class="swatch-label">Charcoal</span></div>
+    <div class="swatch" style="background:#7a7a7a"><span class="swatch-label">Smoke</span></div>
+    <div class="swatch" style="background:#c8c4be"><span class="swatch-label">Silver</span></div>
+    <div class="swatch dark" style="background:#f4f0eb"><span class="swatch-label" style="color:rgba(0,0,0,0.4)">Off-White</span></div>
+    <div class="swatch dark" style="background:#d4ff00"><span class="swatch-label" style="color:rgba(0,0,0,0.45)">Electric</span></div>
+  </div>
+  <div style="margin-top:2.5rem">
+    <div class="section-label" style="margin-bottom:1rem">Typography</div>
+    <div class="type-row">
+      <span class="type-label">Display</span>
+      <span style="font-family:'Playfair Display',serif; font-size:2.8rem; color:var(--brand-silver)">Playfair Display</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Headlines</span>
+      <span style="font-family:'Playfair Display',serif; font-size:1.8rem; font-style:italic; color:var(--fg)">Display <em>Italic</em></span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body</span>
+      <span style="font-family:'Jost',sans-serif; font-size:0.95rem; color:rgba(244,240,235,0.55)">Jost Light — controlled, editorial, precise.</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">03 — Editorial Content</div>
+  <h2 class="section-title">Fashion-editorial <em>social system</em></h2>
+  <p class="section-body" style="margin-bottom:2rem">A rolling social content system built for Instagram grid consistency — hero product shots, quote cards, campaign launches, and collection reveals, all tightly controlled within the brand grid.</p>
+
+  <!-- WIDESCREEN CAMPAIGN EDITORIAL -->
+  <div class="editorial-hero-banner">
+    <img src="cougar_editorial_shadows.jpg" alt="Cougar Editorial Campaign — Architectural Shadows" />
+  </div>
+
+  <!-- INSTAGRAM SOCIAL SYSTEMS SIDE-BY-SIDE -->
+  <div class="social-systems-grid">
+    <div class="social-grid-card">
+      <h3>03.1 — The Obsidian Edit (Noir)</h3>
+      <p>A highly-structured, moody feed aesthetic. Highlights clean silhouettes, limited-edition drop counts, and luxury textured material close-ups alongside custom embossed packaging details.</p>
+      <div class="social-grid-image-wrap">
+        <img src="cougar_social_dark.jpg" alt="Instagram Editorial Feed — The Obsidian Noir Edit" />
+      </div>
+    </div>
+    <div class="social-grid-card">
+      <h3>03.2 — The Linen &amp; Denim Edit</h3>
+      <p>A bright, sun-drenched architectural showcase of relaxed apparel. Focuses on light linens, wash stories, fabric palettes, and relaxed silhouettes matching sustainable textile layouts.</p>
+      <div class="social-grid-image-wrap">
+        <img src="cougar_social_light.jpg" alt="Instagram Editorial Feed — Light Linen &amp; Denim Edit" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">04 — Results</div>
+  <h2 class="section-title">Editorial impact, <em>measurable returns</em></h2>
+  <div class="results-grid">
+    <div class="result-item">
+      <div class="result-num">38%</div>
+      <div class="result-label">Increase in Instagram reach within first quarter post-rebrand</div>
+    </div>
+    <div class="result-item">
+      <div class="result-num">40+</div>
+      <div class="result-label">Social templates and lookbook layouts delivered</div>
+    </div>
+    <div class="result-item">
+      <div class="result-num">3</div>
+      <div class="result-label">Seasonal collection campaigns designed end-to-end</div>
+    </div>
+  </div>
+</section>
+
+<div class="nav-strip">
+  <a href="behance.html#work">← All Projects</a>
+  <a href="botanica-skincare.html">Next: Botánica Skincare →</a>
+</div>
+
+<footer>
+  <p>© 2026 Harsh Patel. Designed with Cloud Dancer — Pantone's Color of the Year.</p>
+  <a href="https://linkedin.com/in/harshpatel2102" target="_blank" rel="noopener">LinkedIn</a>
+</footer>
+
+</body>
+</html>

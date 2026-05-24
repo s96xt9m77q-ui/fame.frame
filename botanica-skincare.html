@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Botánica Skincare — Case Study | Harsh Patel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060606; --fg: #f2ede5; --accent: #3EFFA0;
+    --brand-sage: #7a9e7e; --brand-earth: #8b6f47; --brand-moss: #4a6741;
+    --brand-cream: #f2e8d5; --brand-bark: #3d2e1e;
+    --muted: #555; --border: rgba(255,255,255,0.08);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--fg); font-family:'Jost',sans-serif; font-weight:300; overflow-x:hidden; }
+
+  nav { position:fixed; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between; padding:1.2rem 3rem; background:rgba(6,6,6,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); z-index:100; }
+  nav .logo { font-family:'Instrument Serif',serif; font-size:1.1rem; letter-spacing:0.02em; color:var(--fg); text-decoration:none; }
+  nav ul { display:flex; gap:2rem; list-style:none; }
+  nav ul a { color:rgba(242,237,229,0.5); font-size:0.75rem; text-decoration:none; letter-spacing:0.12em; text-transform:uppercase; transition:color 0.2s; }
+  nav ul a:hover { color:var(--fg); }
+  nav .cv-link { background:var(--accent); color:#060606 !important; padding:0.35rem 0.9rem; border-radius:2px; font-weight:500; }
+
+  .hero { min-height:100vh; display:grid; grid-template-columns:1fr 1.15fr; padding:0; position:relative; overflow:hidden; background:#060606; }
+  .hero-left { display:flex; flex-direction:column; justify-content:center; padding:6rem 4rem 4rem 4rem; z-index:5; position:relative; }
+  .hero-right { position:relative; width:100%; height:100%; overflow:hidden; display:flex; align-items:center; justify-content:center; animation: fadeIn 1.2s ease both; background:#060606; }
+  .hero-img { width:100%; height:100%; object-fit:contain; object-position:center center; display:block; }
+  .hero-bg { display:none; }
+  @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+  /* botanical texture dots */
+  .hero-texture { position:absolute; inset:0; background-image:radial-gradient(circle, rgba(122,158,126,0.08) 1px, transparent 1px); background-size:28px 28px; }
+  .hero-label { font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--brand-sage); margin-bottom:1.5rem; position:relative; }
+  .hero h1 { font-family:'Instrument Serif',serif; font-size:clamp(3.8rem,9.5vw,8.5rem); line-height:0.92; letter-spacing:-0.01em; position:relative; color:var(--fg); }
+  .hero h1 em { font-style:italic; color:var(--brand-sage); }
+  .hero-sub { margin-top:2rem; max-width:520px; font-size:1rem; line-height:1.8; color:rgba(242,237,229,0.5); position:relative; }
+  .hero-tags { display:flex; gap:0.6rem; margin-top:2rem; flex-wrap:wrap; position:relative; }
+  .tag { border:1px solid var(--border); padding:0.3rem 0.9rem; border-radius:100px; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(242,237,229,0.4); }
+
+  .overview { padding:5rem 3rem; display:grid; grid-template-columns:1fr 1fr; gap:5rem; border-top:1px solid var(--border); }
+  .overview-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+  .overview-stat h3 { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:0.6rem; }
+  .overview-stat p { font-size:0.95rem; line-height:1.6; color:rgba(242,237,229,0.7); }
+
+  section { padding:5rem 3rem; border-top:1px solid var(--border); }
+  .section-label { font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--muted); margin-bottom:2.5rem; }
+  .section-title { font-family:'Instrument Serif',serif; font-size:clamp(2rem,4vw,3.2rem); line-height:1.12; margin-bottom:1.5rem; }
+  .section-title em { font-style:italic; color:var(--brand-sage); }
+  .section-body { font-size:0.95rem; line-height:1.85; color:rgba(242,237,229,0.6); max-width:680px; }
+
+  .palette-row { display:flex; margin:2.5rem 0; border-radius:3px; overflow:hidden; height:72px; }
+  .swatch { flex:1; position:relative; }
+  .swatch-label { position:absolute; bottom:0.5rem; left:0.6rem; font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.6); }
+  .swatch.light .swatch-label { color:rgba(0,0,0,0.4); }
+
+  .type-row { padding:1.2rem 0; border-bottom:1px solid var(--border); display:flex; align-items:baseline; gap:2rem; }
+  .type-label { font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); min-width:110px; }
+
+  /* Ingredient cards */
+  .ingredients { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin:2.5rem 0; background:var(--border); }
+  .ingredient { background:#0d0d0d; padding:2rem 1.5rem; text-align:center; }
+  .ingredient-icon { font-size:1.8rem; margin-bottom:0.8rem; }
+  .ingredient-name { font-family:'Instrument Serif',serif; font-size:1rem; color:var(--fg); margin-bottom:0.3rem; }
+  .ingredient-desc { font-size:0.68rem; letter-spacing:0.05em; color:var(--muted); line-height:1.4; }
+
+  /* Social mockups */
+  .mockup-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin:2.5rem 0; background:var(--border); }
+  .mockup-card { background:#0e0e0e; aspect-ratio:1; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .post { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.4rem; padding:1.2rem; text-align:center; }
+
+  /* Product lineup */
+  .product-row { display:flex; gap:1px; margin:2rem 0; background:var(--border); }
+  .product { flex:1; background:#0d0d0d; padding:2rem; display:flex; flex-direction:column; align-items:center; text-align:center; }
+  .product-shape { width:40px; height:65px; border-radius:20px 20px 8px 8px; margin-bottom:1rem; }
+  .product-name { font-family:'Instrument Serif',serif; font-size:0.9rem; color:var(--fg); margin-bottom:0.2rem; }
+  .product-type { font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); }
+
+  .results-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin:2.5rem 0; }
+  .result-item { padding:2rem; border:1px solid var(--border); }
+  .result-num { font-family:'Instrument Serif',serif; font-size:3.2rem; color:var(--brand-sage); line-height:1; margin-bottom:0.4rem; }
+  .result-label { font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); line-height:1.5; }
+
+  .values-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin:2rem 0; }
+  .value { padding:2rem 1.5rem; border-right:1px solid var(--border); }
+  .value:last-child { border-right:none; }
+  .value-icon { font-size:1.2rem; margin-bottom:0.6rem; }
+  .value-name { font-family:'Instrument Serif',serif; font-size:1rem; color:var(--brand-sage); margin-bottom:0.3rem; }
+  .value-desc { font-size:0.7rem; color:var(--muted); line-height:1.4; }
+
+  .nav-strip { padding:4rem 3rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+  .nav-strip a { color:var(--fg); text-decoration:none; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; transition:color 0.2s; }
+  .nav-strip a:hover { color:var(--accent); }
+
+  footer { padding:2rem 3rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+  footer p { font-size:0.7rem; color:var(--muted); }
+  footer a { color:var(--muted); text-decoration:none; font-size:0.7rem; }
+  footer a:hover { color:var(--accent); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);} }
+  .hero-label{animation:fadeUp 0.8s 0.1s ease both;} .hero h1{animation:fadeUp 0.9s 0.25s ease both;} .hero-sub{animation:fadeUp 0.8s 0.4s ease both;} .hero-tags{animation:fadeUp 0.8s 0.55s ease both;}
+
+  @media(max-width:768px){
+    nav{padding:1rem 1.5rem;} nav ul{display:none;}
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { order: 2; padding: 3rem 1.5rem 4rem; }
+    .hero-right { order: 1; height: auto; aspect-ratio: 16/9; }
+    .hero-img { width:100%; height:100%; object-fit:cover; object-position:center center; }
+    section,.overview,.nav-strip,footer{padding-left:1.5rem;padding-right:1.5rem;}
+    .overview{grid-template-columns:1fr;gap:2.5rem;}
+    .results-grid,.mockup-grid{grid-template-columns:1fr 1fr;}
+    .ingredients{grid-template-columns:1fr 1fr;}
+    .values-strip{grid-template-columns:1fr 1fr;}
+    .product-row{flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="behance.html" class="logo">Harsh Patel</a>
+  <ul>
+    <li><a href="behance.html">Home</a></li>
+    <li><a href="behance.html#about">About</a></li>
+    <li><a href="behance.html#work">Work</a></li>
+    <li><a href="behance.html#contact">Contact</a></li>
+    <li><a href="cv.html" class="cv-link">View CV</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-texture" style="opacity:0.6;"></div>
+    <div class="hero-label">Brand Identity &amp; Packaging Concepts — Skincare</div>
+    <h1>Botánica<br><em>Skincare</em></h1>
+    <p class="hero-sub">A naturalistic brand identity and social media system for a plant-based, sustainable skincare brand rooted in botanical science and conscious beauty.</p>
+    <div class="hero-tags">
+      <span class="tag">Brand Identity</span>
+      <span class="tag">Packaging Concepts</span>
+      <span class="tag">Social Media</span>
+      <span class="tag">Brand Guidelines</span>
+      <span class="tag">Adobe Illustrator</span>
+      <span class="tag">Canva Pro</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="botanica_hero_bg.jpg" alt="Botanica Skincare Campaign — Model with botanical skincare products" class="hero-img" />
+  </div>
+</div>
+
+<div class="overview">
+  <div>
+    <div class="section-label">Project Overview</div>
+    <p class="section-body" style="max-width:100%;color:rgba(242,237,229,0.7)">
+      Botánica Skincare is a plant-based, ethically sourced skincare brand navigating a crowded clean beauty market. They needed an identity that communicated genuine botanical credibility — not greenwashing — and a social media system that educated and inspired their community in equal measure.
+    </p>
+  </div>
+  <div class="overview-grid">
+    <div class="overview-stat"><h3>Role</h3><p>Lead Designer</p></div>
+    <div class="overview-stat"><h3>Year</h3><p>2023 – Present</p></div>
+    <div class="overview-stat"><h3>Sector</h3><p>Skincare / Wellness</p></div>
+    <div class="overview-stat"><h3>Tools</h3><p>Illustrator, Photoshop, Canva Pro, Firefly</p></div>
+  </div>
+</div>
+
+<section>
+  <div class="section-label">01 — The Challenge</div>
+  <h2 class="section-title">Authentic sustainability in <em>a greenwashed market</em></h2>
+  <p class="section-body">The clean beauty space is crowded with brands claiming sustainability without substance. Botánica needed a visual identity that felt genuinely rooted in nature — not performative — while remaining sophisticated enough to reach beyond the niche wellness audience. The design had to communicate trust, science, and beauty simultaneously.</p>
+</section>
+
+<section>
+  <div class="section-label">02 — Brand Values</div>
+  <h2 class="section-title">Built on four <em>principles</em></h2>
+  <div class="values-strip">
+    <div class="value">
+      <div class="value-icon">🌿</div>
+      <div class="value-name">Botanical</div>
+      <div class="value-desc">100% plant-derived active ingredients</div>
+    </div>
+    <div class="value">
+      <div class="value-icon">🔬</div>
+      <div class="value-name">Science-led</div>
+      <div class="value-desc">Every formula backed by clinical testing</div>
+    </div>
+    <div class="value">
+      <div class="value-icon">♻️</div>
+      <div class="value-name">Circular</div>
+      <div class="value-desc">Refillable, recyclable, responsible</div>
+    </div>
+    <div class="value">
+      <div class="value-icon">🌍</div>
+      <div class="value-name">Transparent</div>
+      <div class="value-desc">Full ingredient disclosure, always</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">03 — Colour System</div>
+  <h2 class="section-title">The forest floor to <em>the canopy</em></h2>
+  <p class="section-body">A palette drawn from the British countryside and rainforest botanicals — sage, moss, bark, and cream. Deliberately muted and earthy; deliberately un-clinical. Nature's own palette.</p>
+  <div class="palette-row">
+    <div class="swatch" style="background:#3d2e1e"><span class="swatch-label">Bark</span></div>
+    <div class="swatch" style="background:#4a6741"><span class="swatch-label">Moss</span></div>
+    <div class="swatch" style="background:#7a9e7e"><span class="swatch-label">Sage</span></div>
+    <div class="swatch" style="background:#8b6f47"><span class="swatch-label">Earth</span></div>
+    <div class="swatch light" style="background:#f2e8d5"><span class="swatch-label" style="color:rgba(0,0,0,0.4)">Parchment</span></div>
+    <div class="swatch light" style="background:#f2ede5"><span class="swatch-label" style="color:rgba(0,0,0,0.35)">Cloud</span></div>
+  </div>
+  <div style="margin-top:2.5rem">
+    <div class="section-label" style="margin-bottom:1rem">Typography</div>
+    <div class="type-row">
+      <span class="type-label">Display</span>
+      <span style="font-family:'Instrument Serif',serif; font-size:2.6rem; color:var(--brand-sage)">Instrument Serif</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Display Italic</span>
+      <span style="font-family:'Instrument Serif',serif; font-size:1.8rem; font-style:italic; color:var(--fg)">Natural, alive, botanical</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body</span>
+      <span style="font-family:'Jost',sans-serif; font-size:0.95rem; color:rgba(242,237,229,0.55)">Jost Light — grounded, clean, trusted.</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">04 — Product Range Identity</div>
+  <h2 class="section-title">A cohesive product <em>family</em></h2>
+  <p class="section-body" style="margin-bottom:2rem">Each product in the range has its own accent colour drawn from its hero ingredient — creating visual differentiation while maintaining brand unity.</p>
+  <div class="product-row">
+    <div class="product">
+      <div class="product-shape" style="background:linear-gradient(to bottom, #7a9e7e, #4a6741)"></div>
+      <div class="product-name">Forest Face Wash</div>
+      <div class="product-type">Cleanser</div>
+    </div>
+    <div class="product">
+      <div class="product-shape" style="background:linear-gradient(to bottom, #c9b99a, #8b6f47)"></div>
+      <div class="product-name">Earth Restore</div>
+      <div class="product-type">Moisturiser</div>
+    </div>
+    <div class="product">
+      <div class="product-shape" style="background:linear-gradient(to bottom, #a8c5aa, #7a9e7e)"></div>
+      <div class="product-name">Sage Serum</div>
+      <div class="product-type">Treatment</div>
+    </div>
+    <div class="product">
+      <div class="product-shape" style="background:linear-gradient(to bottom, #d4c4a8, #b09878)"></div>
+      <div class="product-name">Petal Eye Cream</div>
+      <div class="product-type">Eye Care</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">05 — Social Media System</div>
+  <h2 class="section-title">Education-led <em>content strategy</em></h2>
+  <p class="section-body" style="margin-bottom:2rem">Social media content built around Botánica's "Know What's On Your Skin" positioning — ingredient spotlights, ritual guides, and science-made-beautiful visuals.</p>
+  <div class="showcase-image-wrap" style="margin: 2.5rem 0; overflow: hidden; border-radius: 8px; border: 1px solid var(--border);">
+    <img src="botanica_social_grid.jpg" alt="Botanica Skincare Social Media System" style="width: 100%; display: block;" />
+  </div>
+</section>
+
+<section>
+  <div class="section-label">06 — Hero Ingredients</div>
+  <h2 class="section-title">Science behind the <em>botanicals</em></h2>
+  <div class="ingredients">
+    <div class="ingredient">
+      <div class="ingredient-icon">🌿</div>
+      <div class="ingredient-name">Bakuchiol</div>
+      <div class="ingredient-desc">Plant-based retinol alternative, clinically proven</div>
+    </div>
+    <div class="ingredient">
+      <div class="ingredient-icon">🌸</div>
+      <div class="ingredient-name">Rosehip</div>
+      <div class="ingredient-desc">Rich in Vitamin C, brightening and regenerating</div>
+    </div>
+    <div class="ingredient">
+      <div class="ingredient-icon">🍃</div>
+      <div class="ingredient-name">Green Tea</div>
+      <div class="ingredient-desc">Antioxidant powerhouse, anti-inflammatory</div>
+    </div>
+    <div class="ingredient">
+      <div class="ingredient-icon">🌻</div>
+      <div class="ingredient-name">Sea Buckthorn</div>
+      <div class="ingredient-desc">Omega-7, deep hydration and repair</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">07 — Results</div>
+  <h2 class="section-title">Organic growth, <em>genuine community</em></h2>
+  <div class="results-grid">
+    <div class="result-item">
+      <div class="result-num">45%</div>
+      <div class="result-label">Increase in Instagram saves — a key trust signal in beauty</div>
+    </div>
+    <div class="result-item">
+      <div class="result-num">35+</div>
+      <div class="result-label">Social media templates and packaging concepts delivered</div>
+    </div>
+    <div class="result-item">
+      <div class="result-num">3×</div>
+      <div class="result-label">Engagement rate above industry average within 4 months</div>
+    </div>
+  </div>
+</section>
+
+<div class="nav-strip">
+  <a href="behance.html#work">← All Projects</a>
+  <a href="xinh-beauty.html">Next: Xinh Beauty →</a>
+</div>
+
+<footer>
+  <p>© 2026 Harsh Patel. Designed with Cloud Dancer — Pantone's Color of the Year.</p>
+  <a href="https://linkedin.com/in/harshpatel2102" target="_blank" rel="noopener">LinkedIn</a>
+</footer>
+
+</body>
+</html>

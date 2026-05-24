@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mexican Grill Co. — Case Study | Harsh Patel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060606; --fg: #f5f0e8; --accent: #3EFFA0;
+    --brand-terra: #d4622a; --brand-lime: #8cc63f; --brand-cream: #f5e6c8;
+    --brand-dark: #1a0f08; --brand-warm: #c4933f;
+    --muted: #555; --border: rgba(255,255,255,0.08);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--fg); font-family:'Jost',sans-serif; font-weight:300; overflow-x:hidden; }
+
+  nav { position:fixed; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between; padding:1.2rem 3rem; background:rgba(6,6,6,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); z-index:100; }
+  nav .logo { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:0.1em; color:var(--fg); text-decoration:none; }
+  nav ul { display:flex; gap:2rem; list-style:none; }
+  nav ul a { color:rgba(245,240,232,0.5); font-size:0.75rem; text-decoration:none; letter-spacing:0.12em; text-transform:uppercase; transition:color 0.2s; }
+  nav ul a:hover { color:var(--fg); }
+  nav .cv-link { background:var(--accent); color:#060606 !important; padding:0.35rem 0.9rem; border-radius:2px; font-weight:500; }
+
+  .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:8rem 3rem 5rem; position:relative; overflow:hidden; }
+  .hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 70% 60% at 70% 20%, rgba(212,98,42,0.18) 0%, transparent 55%), radial-gradient(ellipse 50% 40% at 10% 90%, rgba(140,198,63,0.09) 0%, transparent 50%), #060606; }
+  .hero-stripe { position:absolute; top:0; right:0; width:40%; height:100%; background:linear-gradient(to bottom, var(--brand-terra) 0%, #8b3a0f 100%); clip-path:polygon(20% 0, 100% 0, 100% 100%, 0% 100%); opacity:0.06; }
+  .hero-label { font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--brand-terra); margin-bottom:1.5rem; position:relative; }
+  .hero h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(4.5rem,11vw,10rem); line-height:0.9; letter-spacing:0.02em; position:relative; color:var(--fg); }
+  .hero h1 span { color:var(--brand-terra); }
+  .hero-sub { margin-top:2rem; max-width:540px; font-size:1rem; line-height:1.8; color:rgba(245,240,232,0.5); position:relative; }
+  .hero-tags { display:flex; gap:0.6rem; margin-top:2rem; flex-wrap:wrap; position:relative; }
+  .tag { border:1px solid var(--border); padding:0.3rem 0.9rem; border-radius:100px; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(245,240,232,0.4); }
+
+  .overview { padding:5rem 3rem; display:grid; grid-template-columns:1fr 1fr; gap:5rem; border-top:1px solid var(--border); }
+  .overview-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+  .overview-stat h3 { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:0.6rem; }
+  .overview-stat p { font-size:0.95rem; line-height:1.6; color:rgba(245,240,232,0.7); }
+
+  section { padding:5rem 3rem; border-top:1px solid var(--border); }
+  .section-label { font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--muted); margin-bottom:2.5rem; }
+  .section-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,5vw,4rem); line-height:1; letter-spacing:0.03em; margin-bottom:1.5rem; }
+  .section-title span { color:var(--brand-terra); }
+  .section-body { font-size:0.95rem; line-height:1.85; color:rgba(245,240,232,0.6); max-width:680px; }
+
+  .palette-row { display:flex; margin:2.5rem 0; border-radius:3px; overflow:hidden; height:72px; }
+  .swatch { flex:1; position:relative; }
+  .swatch-label { position:absolute; bottom:0.5rem; left:0.6rem; font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.7); }
+
+  .type-row { padding:1.2rem 0; border-bottom:1px solid var(--border); display:flex; align-items:baseline; gap:2rem; }
+  .type-label { font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); min-width:110px; }
+
+  .mockup-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin:2.5rem 0; background:var(--border); }
+  .mockup-card { background:#0e0e0e; aspect-ratio:1; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .post { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.4rem; padding:1.2rem; text-align:center; }
+
+  /* Menu mockup */
+  .menu-strip { background:#1a0f08; margin:2rem 0; padding:2.5rem 3rem; display:grid; grid-template-columns:1fr 1fr 1fr; gap:2rem; }
+  .menu-item { border-top:1px solid rgba(212,98,42,0.3); padding-top:1rem; }
+  .menu-item-name { font-family:'Bebas Neue',sans-serif; font-size:1.2rem; letter-spacing:0.05em; color:var(--brand-cream); }
+  .menu-item-desc { font-size:0.72rem; color:rgba(245,240,232,0.4); line-height:1.4; margin-top:0.3rem; }
+  .menu-item-price { font-size:0.85rem; color:var(--brand-terra); margin-top:0.5rem; }
+
+  .results-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin:2.5rem 0; }
+  .result-item { padding:2rem; border:1px solid var(--border); }
+  .result-num { font-family:'Bebas Neue',sans-serif; font-size:3.5rem; color:var(--brand-terra); line-height:1; margin-bottom:0.4rem; }
+  .result-label { font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); line-height:1.5; }
+
+  .campaign-banner { background:var(--brand-terra); padding:3rem; margin:2rem 0; display:flex; align-items:center; justify-content:space-between; }
+  .campaign-banner h3 { font-family:'Bebas Neue',sans-serif; font-size:2.5rem; color:var(--brand-cream); letter-spacing:0.05em; }
+  .campaign-banner p { font-size:0.8rem; color:rgba(245,230,200,0.7); max-width:260px; line-height:1.5; }
+  .campaign-tag { background:var(--brand-cream); color:var(--brand-dark); font-family:'Bebas Neue',sans-serif; letter-spacing:0.08em; padding:0.4rem 1rem; border-radius:2px; font-size:0.85rem; }
+
+  .nav-strip { padding:4rem 3rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+  .nav-strip a { color:var(--fg); text-decoration:none; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; transition:color 0.2s; }
+  .nav-strip a:hover { color:var(--accent); }
+
+  footer { padding:2rem 3rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+  footer p { font-size:0.7rem; color:var(--muted); }
+  footer a { color:var(--muted); text-decoration:none; font-size:0.7rem; }
+  footer a:hover { color:var(--accent); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);} }
+  .hero-label{animation:fadeUp 0.8s 0.1s ease both;} .hero h1{animation:fadeUp 0.9s 0.25s ease both;} .hero-sub{animation:fadeUp 0.8s 0.4s ease both;} .hero-tags{animation:fadeUp 0.8s 0.55s ease both;}
+
+  @media(max-width:768px){
+    nav{padding:1rem 1.5rem;} nav ul{display:none;}
+    .hero,section,.overview,.nav-strip,footer{padding-left:1.5rem;padding-right:1.5rem;}
+    .overview{grid-template-columns:1fr;gap:2.5rem;}
+    .results-grid,.mockup-grid{grid-template-columns:1fr 1fr;}
+    .menu-strip{grid-template-columns:1fr;padding:1.5rem;}
+    .campaign-banner{flex-direction:column;gap:1.5rem;align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="behance.html" class="logo">Harsh Patel</a>
+  <ul>
+    <li><a href="behance.html">Home</a></li>
+    <li><a href="behance.html#about">About</a></li>
+    <li><a href="behance.html#work">Work</a></li>
+    <li><a href="behance.html#contact">Contact</a></li>
+    <li><a href="cv.html" class="cv-link">View CV</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-stripe"></div>
+  <div class="hero-label">Brand Identity &amp; Content Strategy — Hospitality</div>
+  <h1>Mexican<br><span>Grill</span><br>Co.</h1>
+  <p class="hero-sub">Bold brand identity, social content strategy, and Red Nose Day campaign for an authentic Mexican street food restaurant group in London.</p>
+  <div class="hero-tags">
+    <span class="tag">Brand Identity</span>
+    <span class="tag">Menu Design</span>
+    <span class="tag">Social Content</span>
+    <span class="tag">Campaign Design</span>
+    <span class="tag">Adobe Photoshop</span>
+    <span class="tag">InDesign</span>
+  </div>
+</div>
+
+<div class="overview">
+  <div>
+    <div class="section-label">Project Overview</div>
+    <p class="section-body" style="max-width:100%;color:rgba(245,240,232,0.7)">
+      Mexican Grill Co. needed to cut through a saturated London street food scene with bold visual identity and a cohesive social media presence. Beyond daily content, I also led the Red Nose Day 2026 charity campaign microsite — a branded fundraising activation layered onto their existing identity.
+    </p>
+  </div>
+  <div class="overview-grid">
+    <div class="overview-stat"><h3>Role</h3><p>Lead Designer &amp; Strategist</p></div>
+    <div class="overview-stat"><h3>Year</h3><p>2022 – Present</p></div>
+    <div class="overview-stat"><h3>Sector</h3><p>Hospitality / F&amp;B</p></div>
+    <div class="overview-stat"><h3>Tools</h3><p>Photoshop, InDesign, Canva Pro, Illustrator</p></div>
+  </div>
+</div>
+
+<section>
+  <div class="section-label">01 — The Challenge</div>
+  <h2 class="section-title">Loud enough to <span>stop the scroll</span></h2>
+  <p class="section-body">London's food scene is relentless. Mexican Grill Co. had great food but lacked the visual firepower to match it online. The brief was clear: create an identity bold enough to compete with established chains, feel authentically Mexican rather than Tex-Mex pastiche, and work across print, social media, and in-store environments simultaneously.</p>
+</section>
+
+<section>
+  <div class="section-label">02 — Colour System</div>
+  <h2 class="section-title">Heat, freshness, <span>earth</span></h2>
+  <p class="section-body">The palette pulls directly from the Mexican landscape — terracotta clay, avocado lime, maize cream, and dark volcanic earth. Every colour has purpose: warmth, appetite, authenticity.</p>
+  <div class="palette-row">
+    <div class="swatch" style="background:#1a0f08"><span class="swatch-label">Volcanic</span></div>
+    <div class="swatch" style="background:#d4622a"><span class="swatch-label">Terracotta</span></div>
+    <div class="swatch" style="background:#c4933f"><span class="swatch-label">Maize</span></div>
+    <div class="swatch" style="background:#8cc63f"><span class="swatch-label">Lime</span></div>
+    <div class="swatch" style="background:#f5e6c8"><span class="swatch-label">Cream</span></div>
+    <div class="swatch" style="background:#f5f0e8"><span class="swatch-label">Parchment</span></div>
+  </div>
+  <div style="margin-top:2.5rem">
+    <div class="section-label" style="margin-bottom:1rem">Typography</div>
+    <div class="type-row">
+      <span class="type-label">Display</span>
+      <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--brand-terra)">BEBAS NEUE</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body</span>
+      <span style="font-family:'Jost',sans-serif; font-size:0.95rem; color:rgba(245,240,232,0.55)">Jost Light — grounded, modern, approachable.</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">03 — Menu Design</div>
+  <h2 class="section-title">Print collateral that <span>works hard</span></h2>
+  <p class="section-body" style="margin-bottom:2rem">Designed menus, flyers, table cards, and in-store POS materials — all built within the brand system for consistency across every customer touchpoint.</p>
+  <div class="menu-strip">
+    <div class="menu-item">
+      <div class="menu-item-name">Classic Burrito</div>
+      <div class="menu-item-desc">Slow-cooked beef, black beans, pico de gallo, chipotle crema</div>
+      <div class="menu-item-price">£10.50</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Smashed Taco Trio</div>
+      <div class="menu-item-desc">Choice of protein, salsa verde, pickled jalapeño, cotija</div>
+      <div class="menu-item-price">£9.00</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Guac &amp; Chips</div>
+      <div class="menu-item-desc">House-made guacamole, tortilla chips, lime, chilli flake</div>
+      <div class="menu-item-price">£5.50</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">04 — Social Content</div>
+  <h2 class="section-title">Scroll-stopping content, <span>every week</span></h2>
+  <p class="section-body" style="margin-bottom:2rem">Ongoing social media content across Instagram, Facebook, and TikTok — including product photography direction, Reel graphics, and seasonal campaign assets.</p>
+  <div class="mockup-grid">
+    <div class="mockup-card">
+      <div class="post" style="background:linear-gradient(135deg,#1a0f08,#3d1f0a)">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--brand-terra);letter-spacing:0.05em">NEW MENU</div>
+        <div style="font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,240,232,0.35)">Summer 2024</div>
+        <div style="width:30px;height:2px;background:var(--brand-lime);margin-top:0.6rem"></div>
+        <div style="font-size:0.7rem;color:rgba(245,240,232,0.5);margin-top:0.4rem">@mexicangrillco</div>
+      </div>
+    </div>
+    <div class="mockup-card">
+      <div class="post" style="background:var(--brand-terra)">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--brand-cream);line-height:0.95">TACO<br>TUESDAY</div>
+        <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,230,200,0.6);margin-top:0.5rem">Buy 2, Get 1 Free</div>
+      </div>
+    </div>
+    <div class="mockup-card">
+      <div class="post" style="background:var(--brand-cream)">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--brand-dark);letter-spacing:0.05em">FRESH. BOLD.<br>AUTHENTIC.</div>
+        <div style="width:40px;height:2px;background:var(--brand-terra);margin:0.6rem auto"></div>
+        <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(26,15,8,0.4)">Mexican Grill Co.</div>
+      </div>
+    </div>
+    <div class="mockup-card">
+      <div class="post" style="background:#1a0f08">
+        <div style="border:2px solid var(--brand-terra);padding:0.7rem 1rem;text-align:center">
+          <div style="font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--brand-lime);margin-bottom:0.3rem">Weekend Special</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--brand-cream)">BOTTOMLESS<br>BRUNCH</div>
+          <div style="font-size:0.6rem;color:var(--brand-terra);margin-top:0.3rem">Sat &amp; Sun 12–4pm</div>
+        </div>
+      </div>
+    </div>
+    <div class="mockup-card">
+      <div class="post" style="background:var(--brand-lime)">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#1a0f08;line-height:1">FRESH<br>DAILY</div>
+        <div style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(26,15,8,0.55);margin-top:0.4rem">No shortcuts. Ever.</div>
+      </div>
+    </div>
+    <div class="mockup-card">
+      <div class="post" style="background:linear-gradient(to bottom,#3d1f0a,#1a0f08)">
+        <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--brand-warm);margin-bottom:0.3rem">Customer Love</div>
+        <div style="font-size:0.85rem;color:var(--fg);line-height:1.4;font-style:italic">"Best burrito in East London, hands down."</div>
+        <div style="font-size:0.52rem;color:var(--muted);margin-top:0.4rem">— Google Reviews ★★★★★</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">05 — Red Nose Day Campaign</div>
+  <h2 class="section-title">Brand activation for <span>a good cause</span></h2>
+  <p class="section-body" style="margin-bottom:2rem">Designed a full Red Nose Day 2026 charity campaign microsite layered onto the Mexican Grill Co. brand — fundraising page, campaign graphics, social assets, and limited-edition menu items.</p>
+  <div class="campaign-banner">
+    <div>
+      <h3>Red Nose Day 2026</h3>
+      <p style="color:rgba(245,230,200,0.7);font-size:0.82rem;margin-top:0.5rem;line-height:1.5">A limited-edition campaign activating Mexican Grill Co.'s community spirit — with £1 from every burrito donated to Comic Relief.</p>
+    </div>
+    <div>
+      <span class="campaign-tag">CHARITY CAMPAIGN</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">06 — Results</div>
+  <h2 class="section-title">Numbers that <span>matter</span></h2>
+  <div class="results-grid">
+    <div class="result-item">
+      <div class="result-num">35%</div>
+      <div class="result-label">Average social media engagement increase post-rebrand</div>
+    </div>
+    <div class="result-item">
+      <div class="result-num">50+</div>
+      <div class="result-label">Social content pieces created across all channels</div>
+    </div>
+    <div class="result-item">
+      <div class="result-num">3</div>
+      <div class="result-label">Seasonal campaigns designed and executed end-to-end</div>
+    </div>
+  </div>
+</section>
+
+<div class="nav-strip">
+  <a href="behance.html#work">← All Projects</a>
+  <a href="cougar-fashion.html">Next: Cougar Fashion →</a>
+</div>
+
+<footer>
+  <p>© 2026 Harsh Patel. Designed with Cloud Dancer — Pantone's Color of the Year.</p>
+  <a href="https://linkedin.com/in/harshpatel2102" target="_blank" rel="noopener">LinkedIn</a>
+</footer>
+
+</body>
+</html>

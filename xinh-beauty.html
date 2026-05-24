@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xinh Beauty — Case Study | Harsh Patel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060606; --fg: #f0ece4; --accent: #3EFFA0;
+    --brand-blush: #e8b4a0; --brand-gold: #c9a96e; --brand-rose: #c97d8a;
+    --muted: #555; --border: rgba(255,255,255,0.08);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--fg); font-family:'Jost',sans-serif; font-weight:300; overflow-x:hidden; }
+
+  nav { position:fixed; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between; padding:1.2rem 3rem; background:rgba(6,6,6,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); z-index:100; }
+  nav .logo { font-family:'Cormorant Garamond',serif; font-size:1.1rem; letter-spacing:0.05em; color:var(--fg); text-decoration:none; }
+  nav ul { display:flex; gap:2rem; list-style:none; }
+  nav ul a { color:rgba(240,236,228,0.5); font-size:0.75rem; text-decoration:none; letter-spacing:0.12em; text-transform:uppercase; transition:color 0.2s; }
+  nav ul a:hover { color:var(--fg); }
+  nav .cv-link { background:var(--accent); color:#060606 !important; padding:0.35rem 0.9rem; border-radius:2px; font-weight:500; }
+
+  .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:8rem 3rem 5rem; position:relative; overflow:hidden; }
+  .hero-bg {
+    position:absolute;
+    inset:0;
+    background-image: linear-gradient(to top, rgba(6,6,6,0.95) 12%, rgba(6,6,6,0.3) 65%, rgba(6,6,6,0.85) 100%), url('xinh_beauty_banner.jpg');
+    background-size: cover;
+    background-position: center;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 0;
+  }
+  .hero:hover .hero-bg {
+    transform: scale(1.04);
+  }
+  .hero-label { font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--brand-blush); margin-bottom:1.5rem; position:relative; z-index: 1; }
+  .hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(4rem,10vw,9rem); font-weight:300; line-height:0.9; letter-spacing:-0.02em; position:relative; z-index: 1; }
+  .hero h1 em { font-style:italic; color:var(--brand-blush); }
+  .hero-sub { margin-top:2rem; max-width:520px; font-size:1rem; line-height:1.8; color:rgba(240,236,228,0.5); position:relative; z-index: 1; }
+  .hero-tags { display:flex; gap:0.6rem; margin-top:2rem; flex-wrap:wrap; position:relative; z-index: 1; }
+  .tag { border:1px solid var(--border); padding:0.3rem 0.9rem; border-radius:100px; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(240,236,228,0.4); }
+
+  .overview { padding:5rem 3rem; display:grid; grid-template-columns:1fr 1fr; gap:5rem; border-top:1px solid var(--border); }
+  .overview-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+  .overview-stat h3 { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:0.6rem; }
+  .overview-stat p { font-size:0.95rem; line-height:1.6; color:rgba(240,236,228,0.7); }
+
+  section { padding:5rem 3rem; border-top:1px solid var(--border); }
+  .section-label { font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--muted); margin-bottom:2.5rem; }
+  .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3rem); font-weight:300; line-height:1.15; margin-bottom:1.5rem; }
+  .section-body { font-size:0.95rem; line-height:1.85; color:rgba(240,236,228,0.6); max-width:680px; }
+
+  .palette-row { display:flex; margin:2.5rem 0; border-radius:3px; overflow:hidden; height:72px; }
+  .swatch { flex:1; position:relative; }
+  .swatch-label { position:absolute; bottom:0.5rem; left:0.6rem; font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.6); }
+
+  .type-row { padding:1.2rem 0; border-bottom:1px solid var(--border); display:flex; align-items:baseline; gap:2rem; }
+  .type-label { font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); min-width:110px; }
+
+  .mockup-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin:2.5rem 0; background:var(--border); }
+  .mockup-card { background:#0e0e0e; aspect-ratio:1; display:flex; align-items:center; justify-content:center; overflow:hidden; border: 1px solid var(--border); }
+  .mockup-card img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+  .mockup-card img:hover { transform:scale(1.05); }
+  .instagram-post { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.4rem; padding:1.2rem; text-align:center; }
+
+  .results-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin:2.5rem 0; }
+  .result-item { padding:2rem; border:1px solid var(--border); }
+  .result-num { font-family:'Cormorant Garamond',serif; font-size:3.2rem; font-weight:300; color:var(--brand-blush); line-height:1; margin-bottom:0.4rem; }
+  .result-label { font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); line-height:1.5; }
+
+  .nav-strip { padding:4rem 3rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+  .nav-strip a { color:var(--fg); text-decoration:none; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; transition:color 0.2s; }
+  .nav-strip a:hover { color:var(--accent); }
+
+  footer { padding:2rem 3rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+  footer p { font-size:0.7rem; color:var(--muted); }
+  footer a { color:var(--muted); text-decoration:none; font-size:0.7rem; }
+  footer a:hover { color:var(--accent); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);} }
+  .hero-label{animation:fadeUp 0.8s 0.1s ease both;} .hero h1{animation:fadeUp 0.9s 0.25s ease both;} .hero-sub{animation:fadeUp 0.8s 0.4s ease both;} .hero-tags{animation:fadeUp 0.8s 0.55s ease both;}
+
+  @media(max-width:768px){
+    nav{padding:1rem 1.5rem;} nav ul{display:none;}
+    .hero,section,.overview,.nav-strip,footer{padding-left:1.5rem;padding-right:1.5rem;}
+    .overview{grid-template-columns:1fr;gap:2.5rem;}
+    .results-grid,.mockup-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="behance.html" class="logo">Harsh Patel</a>
+  <ul>
+    <li><a href="behance.html">Home</a></li>
+    <li><a href="behance.html#about">About</a></li>
+    <li><a href="behance.html#work">Work</a></li>
+    <li><a href="behance.html#contact">Contact</a></li>
+    <li><a href="cv.html" class="cv-link">View CV</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-label">Brand Identity &amp; Social Media — Beauty</div>
+  <h1>Xinh<br><em>Beauty</em></h1>
+  <p class="hero-sub">A complete visual identity and social media system for a Vietnamese-inspired luxury beauty brand — crafted to balance cultural heritage with contemporary elegance.</p>
+  <div class="hero-tags">
+    <span class="tag">Brand Identity</span>
+    <span class="tag">Logo Design</span>
+    <span class="tag">Social Templates</span>
+    <span class="tag">Content Strategy</span>
+    <span class="tag">Adobe Illustrator</span>
+    <span class="tag">Canva Pro</span>
+  </div>
+</div>
+
+<div class="overview">
+  <div>
+    <div class="section-label">Project Overview</div>
+    <p class="section-body" style="max-width:100%;color:rgba(240,236,228,0.7)">
+      Xinh Beauty came to me needing a brand identity built from the ground up — a visual language that balanced Vietnamese cultural nuance with contemporary luxury aesthetics. The challenge: create something that felt rooted yet modern, intimate yet aspirational, without falling into cliché.
+    </p>
+  </div>
+  <div class="overview-grid">
+    <div class="overview-stat"><h3>Role</h3><p>Lead Designer</p></div>
+    <div class="overview-stat"><h3>Year</h3><p>2023 – 2024</p></div>
+    <div class="overview-stat"><h3>Sector</h3><p>Beauty / Wellness</p></div>
+    <div class="overview-stat"><h3>Tools</h3><p>Illustrator, Photoshop, Canva Pro, Firefly</p></div>
+  </div>
+</div>
+
+<section>
+  <div class="section-label">01 — The Challenge</div>
+  <h2 class="section-title">Standing out in a saturated beauty market</h2>
+  <p class="section-body">
+    The beauty industry is fiercely competitive — especially for indie brands. Xinh Beauty needed an identity strong enough to command attention on Instagram and TikTok, communicate luxury on a founder's budget, and authentically represent a Vietnamese-British dual cultural identity. A generic brand kit simply wasn't an option.
+  </p>
+</section>
+
+<section>
+  <div class="section-label">02 — Colour System</div>
+  <h2 class="section-title">A palette drawn from silk and blossom</h2>
+  <p class="section-body">Inspired by the soft warmth of áo dài silk, lotus blossoms, and lacquerware — colours that signal femininity and refinement without resorting to millennial pink clichés.</p>
+  <div class="palette-row">
+    <div class="swatch" style="background:#1a1212"><span class="swatch-label">Ink</span></div>
+    <div class="swatch" style="background:#3d2b2b"><span class="swatch-label">Lacquer</span></div>
+    <div class="swatch" style="background:#c97d8a"><span class="swatch-label">Rose</span></div>
+    <div class="swatch" style="background:#e8b4a0"><span class="swatch-label">Blush</span></div>
+    <div class="swatch" style="background:#c9a96e"><span class="swatch-label">Gold</span></div>
+    <div class="swatch" style="background:#f5ede8"><span class="swatch-label">Petal</span></div>
+  </div>
+  <div style="margin-top:2.5rem">
+    <div class="section-label" style="margin-bottom:1rem">Typography</div>
+    <div class="type-row">
+      <span class="type-label">Display</span>
+      <span style="font-family:'Cormorant Garamond',serif; font-size:2.6rem; color:var(--brand-blush)">Cormorant Garamond</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Headlines</span>
+      <span style="font-family:'Jost',sans-serif; font-size:1.5rem; font-weight:500; letter-spacing:0.08em">JOST MEDIUM</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body</span>
+      <span style="font-family:'Jost',sans-serif; font-size:0.95rem; color:rgba(240,236,228,0.55)">Jost Light — refined, readable, contemporary.</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">03 — Social Media System</div>
+  <h2 class="section-title">30+ templates built to scale</h2>
+  <p class="section-body" style="margin-bottom:2rem">Every template was built in Canva Pro as a fully editable, team-friendly file — product reveals, testimonials, campaign launches, and story slides, all locked to the brand system.</p>
+  <div class="mockup-grid">
+    <div class="mockup-card">
+      <img src="xinh_beauty_new_arrival.jpg" alt="Instagram Post: New Arrival Ultimate Luxury Regenerating Toner" />
+    </div>
+    <div class="mockup-card">
+      <img src="xinh_beauty_quote.jpg" alt="Instagram Quote Card: Beauty begins the moment you decide to be yourself" />
+    </div>
+    <div class="mockup-card">
+      <img src="xinh_beauty_product.jpg" alt="Product Showcase: Radiance Formula Peach Collagen Serum" />
+    </div>
+    <div class="mockup-card">
+      <img src="xinh_beauty_lotus_campaign.jpg" alt="Lotus Collection Campaign Skincare Range" />
+    </div>
+    <div class="mockup-card">
+      <img src="xinh_beauty_review.jpg" alt="Customer Review Lifestyle Dropper Bottle on Silk Sheets" />
+    </div>
+    <div class="mockup-card">
+      <img src="xinh_beauty_before_after.jpg" alt="Before &amp; After Glow Series Skincare Transformation" />
+    </div>
+  </div>
+</section>
+
+<!-- Full Brand Showcase Image (Large Feature Section) -->
+<section style="padding:0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); overflow:hidden; background:#060606;">
+  <div style="width:100%; padding:5rem 3rem 0;">
+    <div class="section-label" style="color:var(--brand-blush); margin-bottom:0.8rem;">04 — Full Brand Showcase</div>
+    <h2 class="section-title" style="color:#fff; font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,5vw,3.8rem); line-height:1.15; font-weight:300; margin-bottom:1.5rem;">The Complete Identity &amp; Print System</h2>
+    <p style="font-size:1.02rem; line-height:1.8; color:rgba(240,236,228,0.65); max-width:800px; margin-bottom:3rem;">
+      A comprehensive visual system bringing together print collateral, custom embossed stationery, luxurious product packaging, and a cohesive social grid layout. Embodying purity and prestige, each component is calibrated to reflect modern Vietnamese luxury.
+    </p>
+  </div>
+  <div style="width:100%; border-top:1px solid var(--border); position:relative; overflow:hidden;">
+    <img src="xinh_beauty_full_showcase.jpg" alt="Xinh Beauty Full Brand Campaign Print &amp; Packaging Identity System" style="width:100%; height:auto; display:block; transition:transform 0.8s ease;" />
+  </div>
+</section>
+
+<section>
+  <div class="section-label">05 — Results</div>
+  <h2 class="section-title">Growth that speaks for itself</h2>
+  <div class="results-grid">
+    <div class="result-item">
+      <div class="result-num">42%</div>
+      <div class="result-label">Increase in Instagram engagement within 3 months</div>
+    </div>
+    <div class="result-item">
+      <div class="result-num">30+</div>
+      <div class="result-label">Social media templates delivered and in active use</div>
+    </div>
+    <div class="result-item">
+      <div class="result-num">2×</div>
+      <div class="result-label">Follower growth in the 6 months post-rebrand</div>
+    </div>
+  </div>
+</section>
+
+<div class="nav-strip">
+  <a href="behance.html#work">← All Projects</a>
+  <a href="mexican-grill.html">Next: Mexican Grill Co. →</a>
+</div>
+
+<footer>
+  <p>© 2026 Harsh Patel. Designed with Cloud Dancer — Pantone's Color of the Year.</p>
+  <a href="https://linkedin.com/in/harshpatel2102" target="_blank" rel="noopener">LinkedIn</a>
+</footer>
+
+</body>
+</html>
