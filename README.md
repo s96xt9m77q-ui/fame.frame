@@ -180,4 +180,4 @@ Focused on building visually distinctive digital experiences that combine design
 
 This project is intended for portfolio and creative presentation purposes.
 
-All visual concepts, layouts, and creative direction belong to the author unless otherwise stated.
+All visual concepts, layouts, and creative direction belong to the author unless otherwise stated
